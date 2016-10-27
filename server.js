@@ -18,6 +18,28 @@ app.get('/hello', function(req, res){
 	res.json({message: "Whats up"});
 });
 
+app.post('/addTeam', function(req,res){
+	var UserObj = {
+		'name' : req.body.name,
+	}
+
+	var newTeam = new Team(TeamObj);
+	newTeam.save(function(error, title){
+		if(error){
+			console.log("Error " + error);
+		} else {
+			console.log(title);
+		}
+	})
+	res.json({message: "You added a Team"});
+});
+
+app.get('/getTeams', function(req,res){
+	Team.find(function(error, results){
+		res.json({results: results});
+	})
+})
+
 
 app.listen(1234);
 console.log("App listening on port 1234");
