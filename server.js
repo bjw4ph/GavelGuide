@@ -19,7 +19,7 @@ app.get('/hello', function(req, res){
 });
 
 app.post('/addTeam', function(req,res){
-	var UserObj = {
+	var TeamObj = {
 		'name' : req.body.name,
 	}
 
