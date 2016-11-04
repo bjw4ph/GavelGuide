@@ -49,6 +49,41 @@ app.get('/getTeams', function(req,res){
 	})
 })
 
+app.get('/getRankedTeams', function(req,res){
+	var query = Team.find().sort('wins');
+	query.exec(function(error,results){
+		res.json({results: results});
+	})
+
+})
+app.get('/getRankedTeamsJoin', function(req,res){
+	// var query = Team.find().populate('member1ID').populate('member2ID').sort([['wins', -1], ['member1ID.speaks', -1], ['member2ID.speaks', -1]]);
+	// var query = Team.find().populate('member1Id').populate('member2Id').sort([['member1Id.speaks', -1]]);
+	//var query = Team.findOne().populate('member1ID');
+	//var query = Team.find().populate('member1ID','member2ID');
+	var query = Team.find().populate('member1ID').populate('member2ID').sort({'wins': -1});
+
+
+
+	query.exec(function(error,results){
+		res.json({results: results});
+	})
+
+})
+app.get('/getRankedTeamsJoin1', function(req,res){
+	// var query = Team.find().populate('member1ID','member2ID').sort([['wins', 1], ['member1ID.speaks', 1], ['member2ID.speaks', 1]]);
+	// var query = Team.find().populate('member1Id').populate('member2Id').sort([['member1Id.speaks', -1]]);
+	//var query = Team.findOne().populate('member1ID');
+	var query = Team.find().populate('member1ID').populate('member2ID').sort({'wins': -1});
+
+
+
+	query.exec(function(error,results){
+		res.json({results: results});
+	})
+
+})
+
 
 app.get('/setUpMongo', function(req,res){
 		var bulk = Team.collection.initializeOrderedBulkOp();
@@ -56,80 +91,80 @@ app.get('/setUpMongo', function(req,res){
 		bulk.insert({
 			_id : "1",
 			name : "UVA1",
-			member1ID : "1",
-			member2ID : "2",
+			member1ID : 1,
+			member2ID : 2,
 			wins : "1",
 			losses: "0"
 		});
 		bulk.insert({
 			_id : "2",
 			name : "Death of Democracy",
-			member1ID : "3",
-			member2ID : "4",
+			member1ID : 3,
+			member2ID : 4,
 			wins : "0",
 			losses: "1"
 		});
 		bulk.insert({
 			_id : "3",
 			name : "A New Hope",
-			member1ID : "5",
-			member2ID : "6",
+			member1ID : 5,
+			member2ID : 6,
 			wins : "1",
 			losses: "0"
 		});
 		bulk.insert({
 			_id : "4",
 			name : "Dark Knights",
-			member1ID : "7",
-			member2ID : "8",
+			member1ID : 7,
+			member2ID : 8,
 			wins : "0",
 			losses: "1"
 		});
 		bulk.insert({
 			_id : "5",
 			name : "Gotham Gangstas",
-			member1ID : "9",
-			member2ID : "10",
+			member1ID : 9,
+			member2ID : 10,
 			wins : "0",
 			losses: "1"
 		});
 		bulk.insert({
 			_id : "6",
 			name : "UVA Prime",
-			member1ID : "11",
-			member2ID : "12",
+			member1ID : 11,
+			member2ID : 12,
 			wins : "1",
 			losses: "0"
 		});
 		bulk.insert({
 			_id : "7",
 			name : "Avengers1",
-			member1ID : "13",
-			member2ID : "14",
+			member1ID : 13,
+			member2ID : 14,
 			wins : "0",
 			losses: "1"
 		});
 		bulk.insert({
 			_id : "8",
 			name : "Avengers2",
-			member1ID : "15",
-			member2ID : "16",
+			member1ID : 15,
+			member2ID : 16,
 			wins : "1",
 			losses: "0"
 		});
 		bulk.insert({
 			_id : "9",
 			name : "Avengers3",
-			member1ID : "17",
-			member2ID : "18",
+			member1ID : 17,
+			member2ID : 18,
 			wins : "1",
 			losses: "0"
 		});
 		bulk.insert({
 			_id : "10",
 			name : "Avengers4",
-			member1ID : "19",
-			member2ID : "20",
+			member1ID : 19,
+			member2ID : 20,
 			wins : "0",
 			losses: "1"
 		});
@@ -138,121 +173,121 @@ app.get('/setUpMongo', function(req,res){
 		var bulkDebater = Debater.collection.initializeOrderedBulkOp();
 		bulkDebater.find({}).remove();
 		bulkDebater.insert({
-			_id : '1',
+			_id : 1,
 			name : 'Brandon Whitfield',
 			school : 'UVA',
 			speaks : '26.5'
 		});
 		bulkDebater.insert({
-			_id : '2',
+			_id : 2,
 			name : 'Ryan Coughlin',
 			school : 'UVA',
 			speaks : '26.5'
 		});
 		bulkDebater.insert({
-			_id : '3',
+			_id : 3,
 			name : 'Donald Trump',
 			school : 'Trump University',
 			speaks : '23.5'
 		});
 		bulkDebater.insert({
-			_id : '4',
+			_id : 4,
 			name : 'Mike Pence',
 			school : 'Trump University',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '5',
+			_id : 5,
 			name : 'Hillary Clinton',
 			school : 'NYU',
 			speaks : '26'
 		});
 		bulkDebater.insert({
-			_id : '6',
+			_id : 6,
 			name : 'Tim Kaine',
 			school : 'NYU',
 			speaks : '25.5'
 		});
 		bulkDebater.insert({
-			_id : '7',
+			_id : 7,
 			name : 'Batman',
 			school : 'Gotham University',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '8',
+			_id : 8,
 			name : 'Robin',
 			school : 'Gotham University',
 			speaks : '25.5'
 		});
 		bulkDebater.insert({
-			_id : '9',
+			_id : 9,
 			name : 'The Joker',
 			school : 'Gotham University',
 			speaks : '26.25'
 		});
 		bulkDebater.insert({
-			_id : '10',
+			_id : 10,
 			name : 'Harley Quinn',
 			school : 'Gotham University',
 			speaks : '23.5'
 		});
 		bulkDebater.insert({
-			_id : '11',
+			_id : 11,
 			name : 'Thomas Jefferson',
 			school : 'UVA',
 			speaks : '26.5'
 		});
 		bulkDebater.insert({
-			_id : '12',
+			_id : 12,
 			name : 'TSully',
 			school : 'UVA',
 			speaks : '26.25'
 		});
 		bulkDebater.insert({
-			_id : '13',
+			_id : 13,
 			name : 'Captain America',
 			school : 'Avengers U',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '14',
+			_id : 14,
 			name : 'Scarlet Witch',
 			school : 'Avengers U',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '15',
+			_id : 15,
 			name : 'Iron Man',
 			school : 'Avengers U',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '16',
+			_id : 16,
 			name : 'Thor',
 			school : 'Avengers U',
 			speaks : '25.25'
 		});
 		bulkDebater.insert({
-			_id : '17',
+			_id : 17,
 			name : 'Bruce Banner',
 			school : 'Avengers U',
 			speaks : '25'
 		});
 		bulkDebater.insert({
-			_id : '18',
+			_id : 18,
 			name : 'Hawkeye',
 			school : 'Avengers U',
 			speaks : '25.5'
 		});
 		bulkDebater.insert({
-			_id : '19',
+			_id : 19,
 			name : 'Black Widow',
 			school : 'Avengers U',
 			speaks : '26.25'
 		});
 		bulkDebater.insert({
-			_id : '20',
+			_id : 20,
 			name : 'Doctor Strange',
 			school : 'Avengers U',
 			speaks : '24.75'
