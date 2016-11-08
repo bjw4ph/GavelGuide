@@ -43,10 +43,79 @@ app.post('/addTeam', function(req,res){
 	res.json({message: "You added a Team"});
 });
 
+app.post('/submitDecision', function(req, res){
+	Pairing.findOne({"_id": req.body._id}, function(err, doc){
+		doc.finished = true;
+		doc.winningTeam = req.body.winningTeam;
+		doc.speaker1ID = req.body.speaker1ID; 
+		doc.speaker2ID = req.body.speaker2ID;
+		doc.speaker3ID = req.body.speaker3ID;
+		doc.speaker4ID = req.body.speaker4ID;
+		doc.speaker1Score = req.body.speaker1Score;
+		doc.speaker2Score = req.body.speaker2Score;
+		doc.speaker3Score = req.body.speaker3Score;
+		doc.speaker4Score = req.body.speaker4Score;
+		doc.save();
+		updateDebaterRanks(doc.speaker1ID, doc.speaker1Score);
+		updateDebaterRanks(doc.speaker2ID, doc.speaker2Score);
+		updateDebaterRanks(doc.speaker3ID, doc.speaker3Score);
+		updateDebaterRanks(doc.speaker4ID, doc.speaker4Score);
+		if(doc.winningTeam == "1"){
+			updateTeamResult(doc.team1ID, true);
+			updateTeamResult(doc.team2ID, false);
+		} else {
+			updateTeamResult(doc.team2ID, true);
+			updateTeamResult(doc.team1ID, false);
+		}
+	} );
+	res.json({message: "Decision Saved"});
+})
+
 app.get('/getTeams', function(req,res){
 	Team.find(function(error, results){
 		res.json({results: results});
 	})
+})
+
+function updateDebaterRanks(id, addRank){
+	Debater.findOne({"_id": id}, function(err,doc){
+		var oldTotal = parseFloat(doc.speaks, 10);
+		var addRanks = parseFloat(addRank, 10);
+		var newTotal = oldTotal + addRanks;
+		doc.speaks = newTotal.toString();
+		doc.save();
+	})
+}
+function updateTeamResult(id, result){
+	Team.findOne({"_id": id}, function(err, doc){
+		if(result){
+			var oldWins = parseInt(doc.wins, 10);
+			var newWins = oldWins+1;
+			doc.wins = newWins.toString();
+			doc.save();
+		} else {
+			var oldLosses = parseInt(doc.losses, 10);
+			var newLosses = oldLosses+1;
+			doc.losses = newLosses.toString();
+			doc.save();
+		}
+	})
+}
+
+app.get('/getCurrentRoundPairings', function(req,res){
+
+	var query = Pairing.find({'finished': false}).populate('team1ID').populate('team2ID').populate('locationID').populate('judgeID');
+	query.exec(function(error,results){
+		res.json({results: results});
+	});
+})
+
+app.get('/getPreviousResults', function(req,res){
+
+	var query = Pairing.find({'finished': true}).populate('team1ID').populate('team2ID').populate('locationID').populate('judgeID').sort({'roundNumber': -1});
+	query.exec(function(error,results){
+		res.json({results: results});
+	});
 })
 
 app.get('/getRankedTeams', function(req,res){
@@ -70,19 +139,7 @@ app.get('/getRankedTeamsJoin', function(req,res){
 	})
 
 })
-app.get('/getRankedTeamsJoin1', function(req,res){
-	// var query = Team.find().populate('member1ID','member2ID').sort([['wins', 1], ['member1ID.speaks', 1], ['member2ID.speaks', 1]]);
-	// var query = Team.find().populate('member1Id').populate('member2Id').sort([['member1Id.speaks', -1]]);
-	//var query = Team.findOne().populate('member1ID');
-	var query = Team.find().populate('member1ID').populate('member2ID').sort({'wins': -1});
 
-
-
-	query.exec(function(error,results){
-		res.json({results: results});
-	})
-
-})
 
 
 app.get('/setUpMongo', function(req,res){
@@ -489,6 +546,8 @@ app.get('/setUpMongo', function(req,res){
 			roundNumber : '2',
 			finished : false
 		})
+
+		bulkPairing.execute();
 
 
 

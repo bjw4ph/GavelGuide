@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Pairing', {
 	_id : {type: String, required : true},
-	team1ID : {type: String, required : true},
-	team2ID : {type: String, required : true},
-	locationID : {type: String, required : true},
-	judgeID : {type: String, required : true},
+	team1ID : {type: String, ref: 'Team', required : true},
+	team2ID : {type: String, ref: 'Team', required : true},
+	locationID : {type: String, ref: 'Location', required : true},
+	judgeID : {type: String, ref: 'Judge', required : true},
 	roundNumber : {type: String, required : true},
 	finished : {type: Boolean, required: true},
 	recordings: {type: String, required : false},
