@@ -77,6 +77,13 @@ app.get('/getTeams', function(req,res){
 	})
 })
 
+app.get('/getPairing/:pairingId', function(req,res){
+	var query = Pairing.find({'_id': req.params.pairingId}).populate('team1ID').populate('team2ID').populate('locationID').populate('judgeID');
+	query.exec(function(error,results){
+		res.json({results: results});
+	});
+})
+
 function updateDebaterRanks(id, addRank){
 	Debater.findOne({"_id": id}, function(err,doc){
 		var oldTotal = parseFloat(doc.speaks, 10);
