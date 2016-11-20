@@ -119,7 +119,7 @@ app.get('/getCurrentRoundPairings', function(req,res){
 
 app.get('/getPreviousResults', function(req,res){
 
-	var query = Pairing.find({'finished': true}).populate('team1ID').populate('team2ID').populate('locationID').populate('judgeID').sort({'roundNumber': -1});
+	var query = Pairing.find({'finished': true}).populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').sort({'roundNumber': -1});
 	query.exec(function(error,results){
 		res.json({results: results});
 	});
