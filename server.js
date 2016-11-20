@@ -361,24 +361,29 @@ app.get('/setUpMongo', function(req,res){
 		var bulkLocation = Location.collection.initializeOrderedBulkOp();
 		bulkLocation.find({}).remove();
 		bulkLocation.insert({
-			_id : '1',
-			name : 'Room1'
+			_id : '5',
+			name : 'Rice 230',
+			address : '85+Engineer\'s+Way,+Charlottesvile,+VA'
 		});
 		bulkLocation.insert({
 			_id : '2',
-			name : 'Room2'
+			name : 'Olsson 120',
+			address : 'Olsson+Hall,+Charlottesville,+VA+22903'
 		});
 		bulkLocation.insert({
 			_id : '3',
-			name : 'Room3'
+			name : 'Newcomb Auditorium',
+			address: 'Newcomb+Hall,+180+McCormick+Road,+Charlottesville,+VA+22903'
 		});
 		bulkLocation.insert({
 			_id : '4',
-			name : 'Room4'
+			name : 'New Cabell 444',
+			address : 'Cabell+Hall,+Charlottesville,+VA+22903'
 		});
 		bulkLocation.insert({
-			_id : '5',
-			name : 'Room5'
+			_id : '1',
+			name : 'Rotunda',
+			address : '1826+University+Ave,+Charlottesville,+VA+22904'
 		});
 		bulkLocation.execute();
 
