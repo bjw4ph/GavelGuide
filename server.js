@@ -78,7 +78,7 @@ app.get('/getTeams', function(req,res){
 })
 
 app.get('/getPairing/:pairingId', function(req,res){
-	var query = Pairing.find({'_id': req.params.pairingId}).populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID');
+	var query = Pairing.find({'_id': req.params.pairingId}).populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').populate('speaker1ID').populate('speaker2ID').populate('speaker3ID').populate('speaker4ID');
 	query.exec(function(error,results){
 		res.json({results: results});
 	});
