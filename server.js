@@ -126,7 +126,7 @@ app.get('/getPreviousResults', function(req,res){
 })
 
 app.get('/getAllPairings', function(req, res){
-	var query = Pairing.find().populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').sort({'roundNumber': -1});
+	var query = Pairing.find().populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').populate('speaker1ID').populate('speaker2ID').populate('speaker3ID').populate('speaker4ID').sort({'roundNumber': -1});
 	query.exec(function(error,results){
 		res.json({results: results});
 	});
@@ -434,10 +434,10 @@ app.get('/setUpMongo', function(req,res){
 			judgeID : '1',
 			roundNumber : '1',
 			winningTeam : '1',
-			speaker1ID : '1',
-			speaker2ID : '2',
-			speaker3ID : '3',
-			speaker4ID : '4',
+			speaker1ID : 1,
+			speaker2ID : 2,
+			speaker3ID : 3,
+			speaker4ID : 4,
 			speaker1Score : '26.5',
 			speaker2Score : '26.5',
 			speaker3Score : '23.5',
@@ -454,10 +454,10 @@ app.get('/setUpMongo', function(req,res){
 			judgeID : '2',
 			roundNumber : '1',
 			winningTeam : '1',
-			speaker1ID : '5',
-			speaker2ID : '6',
-			speaker3ID : '7',
-			speaker4ID : '8',
+			speaker1ID : 5,
+			speaker2ID : 6,
+			speaker3ID : 7,
+			speaker4ID : 8,
 			speaker1Score : '26',
 			speaker2Score : '25.5',
 			speaker3Score : '25',
@@ -474,10 +474,10 @@ app.get('/setUpMongo', function(req,res){
 			judgeID : '3',
 			roundNumber : '1',
 			winningTeam : '2',
-			speaker1ID : '9',
-			speaker2ID : '10',
-			speaker3ID : '11',
-			speaker4ID : '12',
+			speaker1ID : 9,
+			speaker2ID : 10,
+			speaker3ID : 11,
+			speaker4ID : 12,
 			speaker1Score : '26.25',
 			speaker2Score : '23.5',
 			speaker3Score : '26.5',
@@ -492,10 +492,10 @@ app.get('/setUpMongo', function(req,res){
 			judgeID : '4',
 			roundNumber : '1',
 			winningTeam : '2',
-			speaker1ID : '13',
-			speaker2ID : '14',
-			speaker3ID : '15',
-			speaker4ID : '16',
+			speaker1ID : 13,
+			speaker2ID : 14,
+			speaker3ID : 15,
+			speaker4ID : 16,
 			speaker1Score : '25',
 			speaker2Score : '25',
 			speaker3Score : '25.5',
@@ -510,10 +510,10 @@ app.get('/setUpMongo', function(req,res){
 			judgeID : '5',
 			roundNumber : '1',
 			winningTeam : '2',
-			speaker1ID : '17',
-			speaker2ID : '18',
-			speaker3ID : '19',
-			speaker4ID : '20',
+			speaker1ID : 17,
+			speaker2ID : 18,
+			speaker3ID : 19,
+			speaker4ID : 20,
 			speaker1Score : '25',
 			speaker2Score : '25',
 			speaker3Score : '26.25',
@@ -527,6 +527,15 @@ app.get('/setUpMongo', function(req,res){
 			locationID : '1',
 			judgeID : '1',
 			roundNumber : '2',
+			winningTeam : '1',
+			speaker1ID : 1,
+			speaker2ID : 2,
+			speaker3ID : 5,
+			speaker4ID : 6,
+			speaker1Score : '26.5',
+			speaker2Score : '26.5',
+			speaker3Score : '23.5',
+			speaker4Score : '25',
 			finished : false
 		})
 		bulkPairing.insert({
@@ -536,6 +545,15 @@ app.get('/setUpMongo', function(req,res){
 			locationID : '2',
 			judgeID : '2',
 			roundNumber : '2',
+			winningTeam : '1',
+			speaker1ID : 3,
+			speaker2ID : 4,
+			speaker3ID : 7,
+			speaker4ID : 8,
+			speaker1Score : '26.5',
+			speaker2Score : '26.5',
+			speaker3Score : '23.5',
+			speaker4Score : '25',
 			finished : false
 		})
 		bulkPairing.insert({
@@ -545,6 +563,15 @@ app.get('/setUpMongo', function(req,res){
 			locationID : '3',
 			judgeID : '3',
 			roundNumber : '2',
+			winningTeam : '1',
+			speaker1ID : 11,
+			speaker2ID : 12,
+			speaker3ID : 19,
+			speaker4ID : 20,
+			speaker1Score : '26.5',
+			speaker2Score : '26.5',
+			speaker3Score : '23.5',
+			speaker4Score : '25',
 			finished : false
 		})
 		bulkPairing.insert({
@@ -554,6 +581,15 @@ app.get('/setUpMongo', function(req,res){
 			locationID : '4',
 			judgeID : '4',
 			roundNumber : '2',
+			winningTeam : '1',
+			speaker1ID : 9,
+			speaker2ID : 10,
+			speaker3ID : 13,
+			speaker4ID : 14,
+			speaker1Score : '26.5',
+			speaker2Score : '26.5',
+			speaker3Score : '23.5',
+			speaker4Score : '25',
 			finished : false
 		})
 		bulkPairing.insert({
@@ -563,6 +599,15 @@ app.get('/setUpMongo', function(req,res){
 			locationID : '5',
 			judgeID : '5',
 			roundNumber : '2',
+			winningTeam : '1',
+			speaker1ID : 15,
+			speaker2ID : 16,
+			speaker3ID : 17,
+			speaker4ID : 18,
+			speaker1Score : '26.5',
+			speaker2Score : '26.5',
+			speaker3Score : '23.5',
+			speaker4Score : '25',
 			finished : false
 		})
 
