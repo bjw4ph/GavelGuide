@@ -125,6 +125,13 @@ app.get('/getPreviousResults', function(req,res){
 	});
 })
 
+app.get('/getAllPairings', function(req, res){
+	var query = Pairing.find().populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').sort({'roundNumber': -1});
+	query.exec(function(error,results){
+		res.json({results: results});
+	});
+})
+
 app.get('/getRankedTeams', function(req,res){
 	var query = Team.find().sort('wins');
 	query.exec(function(error,results){
