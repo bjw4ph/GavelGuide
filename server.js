@@ -111,7 +111,7 @@ function updateTeamResult(id, result){
 
 app.get('/getCurrentRoundPairings', function(req,res){
 
-	var query = Pairing.find({'finished': false}).populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID');
+	var query = Pairing.find({'finished': false}).populate('team1ID', 'name').populate('team2ID', 'name').populate('locationID').populate('judgeID').populate('speaker1ID').populate('speaker2ID').populate('speaker3ID').populate('speaker4ID');
 	query.exec(function(error,results){
 		res.json({results: results});
 	});
