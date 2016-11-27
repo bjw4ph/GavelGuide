@@ -47,10 +47,6 @@ app.post('/submitDecision', function(req, res){
 	Pairing.findOne({"_id": req.body._id}, function(err, doc){
 		doc.finished = true;
 		doc.winningTeam = req.body.winningTeam;
-		doc.speaker1ID = req.body.speaker1ID; 
-		doc.speaker2ID = req.body.speaker2ID;
-		doc.speaker3ID = req.body.speaker3ID;
-		doc.speaker4ID = req.body.speaker4ID;
 		doc.speaker1Score = req.body.speaker1Score;
 		doc.speaker2Score = req.body.speaker2Score;
 		doc.speaker3Score = req.body.speaker3Score;
