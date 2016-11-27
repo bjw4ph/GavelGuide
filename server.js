@@ -154,6 +154,14 @@ app.get('/getRankedTeamsJoin', function(req,res){
 
 })
 
+app.post('/addS3Key', function(req,res){
+	Pairing.findOne({"_id": req.body._id}, function(err, doc){
+		doc.recordingS3Key = req.body.recordingS3Key;
+		doc.save();
+	});
+	res.json({message: "Decision Saved"});
+})
+
 
 
 app.get('/setUpMongo', function(req,res){

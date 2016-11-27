@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 module.exports = mongoose.model('Pairing', {
 	_id : {type: String, required : true},
+	recordingS3Key : {type: String, required : false},
 	team1ID : {type: String, ref: 'Team', required : true},
 	team2ID : {type: String, ref: 'Team', required : true},
 	locationID : {type: String, ref: 'Location', required : true},
