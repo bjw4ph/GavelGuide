@@ -374,27 +374,38 @@ app.get('/setUpMongo', function(req,res){
 		bulkLocation.insert({
 			_id : '5',
 			name : 'Rice 230',
-			address : '85+Engineer\'s+Way,+Charlottesvile,+VA'
+			address : '85+Engineer\'s+Way,+Charlottesvile,+VA',
+			latitude : '38.031873',
+			longitude : '-78.510696'
 		});
 		bulkLocation.insert({
 			_id : '2',
 			name : 'Olsson 120',
-			address : 'Olsson+Hall,+Charlottesville,+VA+22903'
+			address : 'Olsson+Hall,+Charlottesville,+VA+22903',
+			latitude : '38.032202',
+			longitude : '-78.510520'
 		});
 		bulkLocation.insert({
 			_id : '3',
 			name : 'Newcomb Auditorium',
-			address: 'Newcomb+Hall,+180+McCormick+Road,+Charlottesville,+VA+22903'
+			address: 'Newcomb+Hall,+180+McCormick+Road,+Charlottesville,+VA+22903',
+			latitude : '38.036069',
+			longitude : '-78.506661'
 		});
 		bulkLocation.insert({
 			_id : '4',
 			name : 'New Cabell 444',
-			address : 'Cabell+Hall,+Charlottesville,+VA+22903'
+			address : 'Cabell+Hall,+Charlottesville,+VA+22903',
+			latitude : '38.032713',
+			longitude : '-78.505055'
 		});
 		bulkLocation.insert({
 			_id : '1',
 			name : 'Rotunda',
-			address : '1826+University+Ave,+Charlottesville,+VA+22904'
+			address : '1826+University+Ave,+Charlottesville,+VA+22904',
+			latitude : '38.035821',
+			longitude : '-78.503440'
+
 		});
 		bulkLocation.execute();
 
